@@ -22,7 +22,10 @@ app
   .get('/' , (req,res) => {
   res.sendFile( path.join(__dirname+'/public/html/index.html'))})
   .get('/register', auth)
+  .post('/studentlogin', auth)
+  .get('/feedback' , auth)
 
+  
 app.listen(PORT, () => {
   console.log(`server is runnig at port no ${PORT}`);
 });

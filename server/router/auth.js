@@ -28,7 +28,7 @@ router.get("/register", (req, res) => {
 
 
 router.get("/feedback", (req, res) => {
-  res.send(`Feedback Page`);
+  res.sendFile(path.join(__dirname +'../../../public/html/feedback.html'))
 });
 
 
@@ -40,16 +40,15 @@ router.get("/result", (req, res) => {
 router.get("/admin", (req, res) => {
   res.send(`Admin Page`);
 });
-
-//----------POST student login data---------
+// ------------POST feedback--------------
 router.post("/feedback", (req, res) => {
   console.log(req.body);
 });
-
+//----------POST student login data---------
 router.post("/studentlogin", (req, res) => {
-  const { name, email, enrollment, department, semester } = req.body;
+  const { name, email, enrollment, department, semester, course, session } = req.body;
 
-  if (!name || !email || !enrollment || !department || !semester) {
+  if (!name || !email || !enrollment || !department || !semester || !session || !course) {
     res.status(422).send({ error: "Please Fill all the field" });
     return;
   }
@@ -60,26 +59,27 @@ router.post("/studentlogin", (req, res) => {
       return;
     }
     //new student
-    var user = new User({
+  var user = new User({
       name :req.body.name,
       enrollment :req.body.enrollment,
       email :req.body.email,
-      course : req.query.course,
+      course : req.body.course,
       session:req.body.session,
-      department :req.query.department,
-      semester :req.query.semester,
+      department :req.body.department,
+      semester :req.body.semester,
       
-    })
+  })
     // save student data to db
-    user.save().then(() => {
+   user.save().then(() => {
+        res.redirect('/feedback');
         res.status(201).json({ message: "User Registered Sucessfully" });
-        res.sendFile(path.join(__dirname +'../../../public/html/feedback.html'))
-
+        
       }).catch((err) => {
         res.status(500).json({ error: "Failed To Register User" });
         console.log(err);
       });
   });
 });
+
 
 module.exports = router;

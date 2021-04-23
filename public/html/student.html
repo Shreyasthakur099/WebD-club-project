@@ -50,7 +50,7 @@
 </head>
 <body class="feedback-form-1">
 
-    <form action="/studentlogin" class="form">
+    <form action="/studentlogin" method="POST" class="form">
         <header>
             <h1>Online Feedback Form</h1>
         </header>
@@ -113,18 +113,9 @@
                     <h3>Semester</h3>
                     <input type="text" name="semester" id="semester" list="semesters" placeholder="Enter Your semester" size="3" required>
                     <datalist id="semesters">
-                        <option value="first"></option>
-                        <option value="second"></option>
-                        <option value="Third"></option>
-                    </datalist>
-                </div>
-                <div class="box">
-                    <h3>Subject</h3>
-                    <input type="text" name="subject" id="subject" list="subjects" placeholder="Enter the Name of Subject" required>
-                    <datalist id="subjects">
-                        <option value="first"></option>
-                        <option value="second"></option>
-                        <option value="Third"></option>
+                        <option value="1"></option>
+                        <option value="2"></option>
+                        <option value="3"></option>
                     </datalist>
                 </div>
             </div>
